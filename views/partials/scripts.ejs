@@ -1,0 +1,39 @@
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+  integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer"
+></script>
+<script src="https://bootswatch.com/_vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://api.mapbox.com/mapbox-gl-js/v2.10.0/mapbox-gl.js"></script>
+
+<script>
+  $(document).ready(() => {
+    const location = $('#address-txt').text()
+
+    // MAPBOX_ACCESS_TOKEN_HERE
+    const API_KEY = ''
+
+    const URL = `https://api.mapbox.com/geocoding/v5/mapbox.places/${location}.json?access_token=${API_KEY}`
+
+    $.ajax({
+      method: 'GET',
+      url: URL,
+      success: (data) => {
+        const coordinates = data.features[0].center
+
+        mapboxgl.accessToken = API_KEY
+        const map = new mapboxgl.Map({
+          container: 'map', // container ID
+          style: 'mapbox://styles/mapbox/streets-v11', // style URL
+          center: coordinates, // starting position [lng, lat]
+          zoom: 12, // starting zoom
+          projection: 'globe', // display the map as a 3D globe
+        })
+        map.on('style.load', () => {
+          map.setFog({}) // Set the default atmosphere style
+        })
+      },
+    })
+  })
+</script>

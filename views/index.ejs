@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('./partials/head'); %>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <%- include('./partials/navbar', {isLoggedIn: isLoggedIn}); %>
+
+    <!-- End Of Navbar -->
+
+    <main>
+      <section class="w-100 bg-dark mb-5" style="min-height: 200px">
+        <div class="hero text-white py-5">
+          <div>
+            <h3 class="font-weight-bold">WELCOME TO LISTING</h3>
+          </div>
+          <div>
+            <p class="lead">Find or Post your own listing</p>
+          </div>
+          <% if(isLoggedIn === 'false') { %>
+          <div>
+            <a href="/login" class="btn btn-primary px-3 py-2 text-uppercase">
+              Sign Up to add your list
+            </a>
+          </div>
+          <% } %> <% if(isLoggedIn === 'true') { %>
+          <div>
+            <a
+              href="/listing/new"
+              class="btn btn-primary px-3 py-2 text-uppercase"
+            >
+              CREATE A LISTING
+            </a>
+            <% } %>
+          </div>
+        </div>
+      </section>
+
+      <%if(message != ''){%>
+      <div class="container">
+        <div class="alert alert-dismissible alert-info">
+          <button type="button" class="btn-transparent" data-bs-dismiss="alert">
+            <span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                width="32"
+                height="32"
+                class="text-white"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+            </span>
+          </button>
+          <%= message %>
+        </div>
+      </div>
+      <%}%>
+
+      <section class="py-5">
+        <%if(listings.length === 0) {%>
+        <div class="container">
+          <div class="w-100">
+            <div class="alert alert-dismissible alert-warning">
+              <h4 class="alert-heading">OOps!</h4>
+              <p class="mb-0">There are no listing.</p>
+            </div>
+          </div>
+        </div>
+        <% } else { %>
+        <div class="container">
+          <div class="row">
+            <% listings.forEach(function(listing) { %>
+            <div class="col-md-4">
+              <div class="card mb-3">
+                <div class="card-body">
+                  <a
+                    class="text-decoration-none"
+                    href="/listing/<%= listing._id %>"
+                  >
+                    <h5 class="card-title"><%= listing.name %></h5>
+                  </a>
+                  <h6 class="card-subtitle text-muted">
+                    Posted by: <%= listing.uploader && listing.uploader.username
+                    %>
+                  </h6>
+                </div>
+                <div class="card-listing-img-wrapper">
+                  <img
+                    src="<%= listing.imageUrl %>"
+                    class="card-listing-img"
+                    alt="<%= listing.imageUrl %>"
+                  />
+                </div>
+                <div class="card-body">
+                  <p class="card-text">
+                    <%= listing.description.substring(0, 75) %> ...
+                  </p>
+                </div>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">
+                    Price:
+                    <span class="font-weight-bold"><%= listing.price %></span>
+                  </li>
+                  <li class="list-group-item">
+                    Location: <i><%= listing.address %></i>
+                  </li>
+                </ul>
+                <div class="card-footer text-muted">
+                  Post created: <%= listing.createdAt %>
+                </div>
+              </div>
+            </div>
+            <% }); %>
+          </div>
+        </div>
+        <% } %>
+      </section>
+    </main>
+
+    <%- include('./partials/footer'); %> <%- include('./partials/scripts'); %>
+  </body>
+</html>

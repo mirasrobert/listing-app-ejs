@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../partials/head'); %>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <%- include('../partials/navbar'); %>
+    <!-- End Of Navbar -->
+
+    <div class="container-fluid" style="min-height: 300px">
+      <div class="row d-flex justify-content-center">
+        <div class="col-md-4 mt-5 pt-5">
+          <% if(message != '') {%>
+          <div class="alert alert-dismissible alert-danger text-center">
+            <%= message %>
+          </div>
+          <%}%>
+          <div class="card">
+            <div class="card-body">
+              <h3 class="text-center py-3 text-uppercase">
+                Create your account
+              </h3>
+              <form action="/register" method="POST">
+                <div class="form-group">
+                  <label for="exampleInputEmail1" class="form-label mt-4"
+                    >Username</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="exampleInputEmail1"
+                    aria-describedby="emailHelp"
+                    placeholder="Enter username"
+                    name="username"
+                    required
+                  />
+                  <small id="emailHelp" class="form-text text-muted"
+                    >Create a unique username.</small
+                  >
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputPassword1" class="form-label mt-2"
+                    >Password</label
+                  >
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="exampleInputPassword1"
+                    placeholder="Password"
+                    name="password"
+                    required
+                  />
+                  <small id="emailHelp" class="form-text text-muted"
+                    >An 8-character password is recommended.</small
+                  >
+                </div>
+                <button class="btn btn-primary px-3 py-2">Register</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <%- include('../partials/footer'); %> <%- include('../partials/scripts'); %>
+  </body>
+</html>

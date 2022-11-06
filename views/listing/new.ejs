@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../partials/head'); %>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <%- include('../partials/navbar'); %>
+    <!-- End Of Navbar -->
+
+    <main>
+      <div class="container-fluid pb-5 mb-3" style="min-height: 300px">
+        <div class="row d-flex justify-content-center">
+          <div class="col-md-5 mt-5 pt-5">
+            <div class="card">
+              <div class="card-body">
+                <h3 class="text-center py-3 text-uppercase">
+                  Create new listing
+                </h3>
+                <form action="/listing" method="POST">
+                  <div class="form-group">
+                    <label for="inputName" class="form-label mt-1">Name</label>
+                    <input
+                      required
+                      type="text"
+                      class="form-control"
+                      id="inputName"
+                      aria-describedby="listingTitle"
+                      placeholder="Enter listing title"
+                      name="name"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="description" class="form-label mt-1"
+                      >Description</label
+                    >
+                    <textarea
+                      placeholder="Enter listing description..."
+                      class="form-control"
+                      name="description"
+                      id="description"
+                      rows="5"
+                      required
+                    ></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label for="imageUrl" class="form-label mt-1"
+                      >Image URL</label
+                    >
+                    <input
+                      required
+                      type="url"
+                      class="form-control"
+                      id="imageUrl"
+                      aria-describedby="imageUrlHelp"
+                      placeholder="Enter image url"
+                      name="imageUrl"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="price" class="form-label mt-1">Price</label>
+                    <input
+                      required
+                      type="number"
+                      class="form-control"
+                      id="price"
+                      aria-describedby="priceHelp"
+                      placeholder="$.00"
+                      name="price"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="address" class="form-label mt-1"
+                      >Location</label
+                    >
+                    <input
+                      required
+                      type="text"
+                      class="form-control"
+                      id="address"
+                      placeholder="eg. 33 Blg Makati City Philippines"
+                      name="address"
+                    />
+                    <small class="form-text text-muted"
+                      >Please put an exact location for accuracy of the
+                      geocoding.</small
+                    >
+                  </div>
+                  <button class="btn btn-primary px-3 py-2">Submit</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <%- include('../partials/footer'); %> <%- include('../partials/scripts'); %>
+  </body>
+</html>
